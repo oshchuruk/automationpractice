@@ -32,9 +32,10 @@ public class SearchTest {
         webDriver.findElement(By.name("search_query")).sendKeys("Printed Summer Dress");
         webDriver.findElement(By.name("search_query")).submit();
         Assert.assertTrue(webDriver.findElement(By.className("product-count")).getText().contains(" 3 items"));
-        ArrayList<WebElement> found_elements = new ArrayList<>(webDriver.findElements(By.cssSelector("ul[class=\"product_list grid row\"] a[class = \"product-name\"] ")));
+        //ArrayList<WebElement> found_elements = new ArrayList<>(webDriver.findElements(By.cssSelector("ul[class=\"product_list grid row\"] a[class = \"product-name\"] ")));
+        ArrayList<WebElement> found_elements = new ArrayList<>(webDriver.findElements(By.cssSelector("ul[class=\"product_list grid row\"] > li")));
         Assert.assertEquals(3, found_elements.size());
-        Assert.assertEquals("Printed Summer Dress", found_elements.get(0).getText());
+        Assert.assertTrue(found_elements.get(0).getText().contains("Printed Summer Dress"));
     }
 
 //    @AfterClass
