@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -13,16 +14,6 @@ import java.util.concurrent.TimeUnit;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class SearchTest {
-//    private static String BASE_URL = "http://automationpractice.com/index.php";
-//    private static WebDriver webDriver = FirstTestSuite;
-//
-//    @BeforeClass
-//    public static void setUp(){
-//        webDriver = new FirefoxDriver();
-//        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        webDriver.manage().window().maximize();
-//        webDriver.get(BASE_URL);
-//    }
 
     private static WebDriver webDriver = FirstTestSuite.getWebDriver();
 
@@ -33,13 +24,10 @@ public class SearchTest {
         webDriver.findElement(By.name("search_query")).submit();
         Assert.assertTrue(webDriver.findElement(By.className("product-count")).getText().contains(" 3 items"));
         //ArrayList<WebElement> found_elements = new ArrayList<>(webDriver.findElements(By.cssSelector("ul[class=\"product_list grid row\"] a[class = \"product-name\"] ")));
-        ArrayList<WebElement> found_elements = new ArrayList<>(webDriver.findElements(By.cssSelector("ul[class=\"product_list grid row\"] > li")));
-        Assert.assertEquals(3, found_elements.size());
+        By found_elements_locator = By.cssSelector("ul[class=\"product_list grid row\"] > li");
+        ArrayList<WebElement> found_elements = new ArrayList<>(webDriver.findElements(found_elements_locator));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.listLenghtToBe(found_elements_locator,3));
         Assert.assertTrue(found_elements.get(0).getText().contains("Printed Summer Dress"));
     }
 
-//    @AfterClass
-//    public static void tearDown(){
-//        webDriver.quit();
-//    }
 }

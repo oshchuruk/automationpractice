@@ -10,16 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginTest {
-//    private static String BASE_URL = "http://automationpractice.com/index.php";
     private static WebDriver webDriver = FirstTestSuite.getWebDriver();
-
-//    @BeforeClass
-//    public static void setUp(){
-//        webDriver = new FirefoxDriver();
-//        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        webDriver.manage().window().maximize();
-//        webDriver.get(BASE_URL);
-//    }
 
     public void openAccount(){
         webDriver.findElement(By.className("account")).click();
@@ -72,9 +63,4 @@ public class LoginTest {
         Assert.assertEquals("Your personal information".toUpperCase(), webDriver.findElement(By.className("page-subheading")).getText());
     }
 
-
-//    @AfterClass
-//    public static void tearDown(){
-//        webDriver.quit();
-//    }
 }

@@ -14,16 +14,16 @@ public class StalenessTest {
 
     @Test
     public void test01_Staleness(){
-        (new WebDriverWait(webDriver, 10)).until(CustomConditions.pageIsLoaded("My Store", "/index.php"));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.pageIsLoaded("My Store", "/index.php"));
         webDriver.findElement(By.name("search_query")).clear();
         webDriver.findElement(By.name("search_query")).sendKeys("dress");
         webDriver.findElement(By.name("search_query")).submit();
-        (new WebDriverWait(webDriver, 10)).until(CustomConditions.pageIsLoaded("Search", "search"));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.pageIsLoaded("Search", "search"));
 
         By locator = By.cssSelector("li[id=\"grid\"][class=\"selected\"]");
 
         (new WebDriverWait(webDriver, 10)).until(ExpectedConditions.presenceOfElementLocated(locator));
         webDriver.findElement(By.className("icon-th-list")).click();
-        (new WebDriverWait(webDriver, 10)).until(CustomConditions.stalenessOfElement(locator));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.stalenessOfElement(locator));
     }
 }

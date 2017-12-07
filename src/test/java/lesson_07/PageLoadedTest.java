@@ -12,7 +12,7 @@ public class PageLoadedTest {
 
     @Test
     public void test01_TitleUrl(){
-        (new WebDriverWait(webDriver, 10)).until(CustomConditions.pageIsLoaded("My Store", "/index.php"));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.pageIsLoaded("My Store", "/index.php"));
     }
 
 }

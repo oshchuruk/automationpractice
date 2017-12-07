@@ -17,11 +17,11 @@ public class NthElementTest {
 
     @Test
     public void test01_NthElement() {
-        (new WebDriverWait(webDriver, 10)).until(CustomConditions.pageIsLoaded("My Store", "/index.php"));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.pageIsLoaded("My Store", "/index.php"));
         webDriver.findElement(By.name("search_query")).clear();
         webDriver.findElement(By.name("search_query")).sendKeys("dress");
         (new WebDriverWait(webDriver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.className("ac_results")));
         List<WebElement> needed_list = webDriver.findElements(By.cssSelector("div[class = \"ac_results\"] li"));
-        (new WebDriverWait(webDriver, 10)).until(CustomConditions.listNthElementHasText(needed_list, 1, "Evening"));
+        (new WebDriverWait(webDriver, 10)).until(lesson_07.CustomConditions.listNthElementHasText(needed_list, 1, "Evening"));
     }
 }
