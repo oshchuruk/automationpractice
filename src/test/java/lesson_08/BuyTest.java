@@ -14,14 +14,23 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentI
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BuyTest {
     public static WebDriver webDriver;
-    public static String BASE_URL = "http://automationpractice.com/index.php?controller=my-account";
+    public static String BASE_URL = "http://automationpractice.com/";
 
     AccountPage accountPage;
     LoginPage loginPage;
     SearchPage searchResultPage;
+    StartPage startPage;
+    ItemPage itemPage;
+    CartPage cartPage;
+    AddressPage addressPage;
+    ShippingPage shippingPage;
+    PaymentPage paymentPage;
+    PaymentMethodPage bankwirePage;
+    OrderHistoryPage orderHistoryPage;
 
     String email = "oshchuruk@gmail.com";
     String pass = "12345";
+    static String TARGET_ITEM = "printed summer dress";
 
     private void assertThat(ExpectedCondition<Boolean> condition) {
         (new WebDriverWait(webDriver,5)).until(condition);
@@ -37,12 +46,24 @@ public class BuyTest {
 
     @Test
     public void test_Buy(){
-        loginPage = new LoginPage(webDriver);
+        startPage = new StartPage(webDriver);
+        loginPage = startPage.navigateToLogin();
         accountPage = loginPage.login(email, pass);
-        assertThat(textToBePresentInElement(accountPage.accountheading, "My account".toUpperCase()));
-
-        searchResultPage = accountPage.search("printed summer dress");
-
+        searchResultPage = accountPage.search(TARGET_ITEM);
+        //searchResultPage.isItemFound(TARGET_ITEM);
+        itemPage = searchResultPage.selectItem(TARGET_ITEM);
+        itemPage.addItemToCart();
+        cartPage = itemPage.navigateToCart();
+        //cartPage.neededItemInCart(TARGET_ITEM);
+        addressPage = cartPage.proceed();
+        shippingPage = addressPage.proceed();
+        paymentPage = shippingPage.proceed();
+        bankwirePage = paymentPage.payWithBankWire();
+        bankwirePage.confirmOrder();
+        accountPage = bankwirePage.navigateToAccount();
+        orderHistoryPage = accountPage.navigateToOrderHistory();
+        orderHistoryPage.getLastOrderInfo();
+        orderHistoryPage.checkItemInOrder(TARGET_ITEM);
     }
 
 

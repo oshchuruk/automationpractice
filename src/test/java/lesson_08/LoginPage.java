@@ -5,13 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
 
     WebDriver webDriver;
 
     LoginPage(WebDriver webDriver){
-        PageFactory.initElements(webDriver, this);
-        this.webDriver = webDriver;
+        super(webDriver);
     }
 
     @FindBy(name = "email")
@@ -45,6 +44,6 @@ public class LoginPage {
         enterPassword(password);
         clickSignInBtn();
 
-        return new AccountPage(webDriver);
+        return new AccountPage(getWebDriver());
     }
 }

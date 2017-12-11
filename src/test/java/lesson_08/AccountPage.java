@@ -1,5 +1,6 @@
 package lesson_08;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,8 +10,7 @@ public class AccountPage extends BasePage{
     WebDriver webDriver;
 
     AccountPage(WebDriver webDriver){
-        PageFactory.initElements(webDriver, this);
-        this.webDriver = webDriver;
+        super(webDriver);
     }
 
     @FindBy(className = "logout")
@@ -19,10 +19,14 @@ public class AccountPage extends BasePage{
     @FindBy(className = "page-heading")
     public WebElement accountheading;
 
+    OrderHistoryPage navigateToOrderHistory(){
+        webDriver.findElement(By.cssSelector("a[title=\"Orders\"]")).click();
+        return new OrderHistoryPage(getWebDriver());
+    }
 
 
     LoginPage signOut(){
         sign_out_link.click();
-        return new LoginPage(webDriver);
+        return new LoginPage(getWebDriver());
     }
 }
