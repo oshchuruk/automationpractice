@@ -18,20 +18,18 @@ public class CartPage extends BasePage{
     @FindBy (css = "p[class=\"cart_navigation clearfix\"] a[title=\"Proceed to checkout\"]")
     WebElement proceed_button;
 
-//    @FindBy (css = "td p[class=\"product-name\"]")
-//    WebElement items_in_cart;
-//
-//
-//    boolean neededItemInCart(String needed_item){
-//        List<WebElement> items_in_cart = webDriver.findElements(By.cssSelector(""));
-//
-//        for (WebElement item : items_in_cart){
-//            if (item.getText().toLowerCase().equals(needed_item.toLowerCase())){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    @FindBy (css = "td p[class=\"product-name\"]")
+    List<WebElement> items_in_cart;
+
+
+    boolean neededItemInCart(String needed_item){
+        for (WebElement item : items_in_cart){
+            if (item.getText().toLowerCase().equals(needed_item.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
 
     AddressPage proceed(){
         proceed_button.click();

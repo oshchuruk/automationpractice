@@ -30,7 +30,7 @@ public class BuyTest {
 
     String email = "oshchuruk@gmail.com";
     String pass = "12345";
-    static String TARGET_ITEM = "printed summer dress";
+    static String TARGET_ITEM = "blouse";
 
     private void assertThat(ExpectedCondition<Boolean> condition) {
         (new WebDriverWait(webDriver,5)).until(condition);
@@ -50,11 +50,11 @@ public class BuyTest {
         loginPage = startPage.navigateToLogin();
         accountPage = loginPage.login(email, pass);
         searchResultPage = accountPage.search(TARGET_ITEM);
-        //searchResultPage.isItemFound(TARGET_ITEM);
+        searchResultPage.isItemFound(TARGET_ITEM);
         itemPage = searchResultPage.selectItem(TARGET_ITEM);
         itemPage.addItemToCart();
         cartPage = itemPage.navigateToCart();
-        //cartPage.neededItemInCart(TARGET_ITEM);
+        cartPage.neededItemInCart(TARGET_ITEM);
         addressPage = cartPage.proceed();
         shippingPage = addressPage.proceed();
         paymentPage = shippingPage.proceed();

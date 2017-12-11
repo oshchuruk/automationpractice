@@ -19,8 +19,11 @@ public class AccountPage extends BasePage{
     @FindBy(className = "page-heading")
     public WebElement accountheading;
 
+    @FindBy(css = "a[title=\"Orders\"]")
+    WebElement orders_button;
+
     OrderHistoryPage navigateToOrderHistory(){
-        webDriver.findElement(By.cssSelector("a[title=\"Orders\"]")).click();
+        orders_button.click();
         return new OrderHistoryPage(getWebDriver());
     }
 

@@ -12,12 +12,15 @@ public class PaymentMethodPage extends BasePage{
     public PaymentMethodPage(WebDriver webDriver) {
         super(webDriver);
     }
-    @FindBy(css = "p[class=\\\"cart_navigation clearfix\\\"] button")
+    @FindBy(css = "p[class=\"cart_navigation clearfix\"] button")
     WebElement confirm_button;
+
+    @FindBy(css = "p[class=\"cheque-indent\"]")
+    WebElement cheque;
 
     void confirmOrder(){
         confirm_button.click();
-        webDriver.findElement(By.cssSelector("p[class=\"cheque-indent\"]")).getText().contains("Your order on My Store is complete");
+        cheque.getText().contains("Your order on My Store is complete");
     }
 
 }

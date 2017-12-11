@@ -21,8 +21,11 @@ public class SearchPage extends BasePage{
     @FindBy(className = "heading-counter")
     WebElement heading_counter;
 
+//    @FindBy(css = "div[class=\"product-container\"] a[class=\"product-name\"]")
+//    WebElement first_result;
+
     @FindBy(css = "div[class=\"product-container\"] a[class=\"product-name\"]")
-    WebElement first_result;
+    List<WebElement> search_result;
 
     int count_of_results = Character.getNumericValue(heading_counter.getText().charAt(0));
 
@@ -31,26 +34,24 @@ public class SearchPage extends BasePage{
         switch_to_list_view_button.click();
     }
 
-//    boolean isItemFound(String item_name){
-//        for(WebElement item : search_result){
-//            String temp_name = item.getText().toLowerCase();
-//            if (temp_name.equals(item_name.toLowerCase())){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    boolean isItemFound(String item_name){
+        for(WebElement item : search_result){
+            String temp_name = item.getText().toLowerCase();
+            if (temp_name.equals(item_name.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
 
     ItemPage selectItem (String item_name){
-//        List<WebElement> search_result = webDriver.findElements(By.cssSelector("div[class=\"product-container\"] a[class=\"product-name\"]"));
-//        for(WebElement item : search_result){
-//            String temp_name = item.getText().toLowerCase();
-//            if (temp_name.equals(item_name.toLowerCase())){
-//                item.click();
-//                break;
-//            }
-//        }
-        first_result.click();
+        for(WebElement item : search_result){
+            String temp_name = item.getText().toLowerCase();
+            if (temp_name.equals(item_name.toLowerCase())){
+                item.click();
+                break;
+            }
+        }
         return new ItemPage(getWebDriver());
     }
 
