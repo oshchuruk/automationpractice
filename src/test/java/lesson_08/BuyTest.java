@@ -55,11 +55,11 @@ public class BuyTest {
         loginPage = startPage.navigateToLogin();
         accountPage = loginPage.login(email, pass);
         searchResultPage = accountPage.search(TARGET_ITEM);
-        searchResultPage.isItemFound(TARGET_ITEM);
+        Assert.assertTrue(searchResultPage.isItemFound(TARGET_ITEM));
         itemPage = searchResultPage.selectItem(TARGET_ITEM);
         itemPage.addItemToCart();
         cartPage = itemPage.navigateToCart();
-        cartPage.neededItemInCart(TARGET_ITEM);
+        Assert.assertTrue(cartPage.neededItemInCart(TARGET_ITEM));
         addressPage = cartPage.proceed();
         shippingPage = addressPage.proceed();
         paymentPage = shippingPage.proceed();
