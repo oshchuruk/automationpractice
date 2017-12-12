@@ -23,6 +23,7 @@ public class AccountPage extends BasePage{
     WebElement orders_button;
 
     OrderHistoryPage navigateToOrderHistory(){
+        LOG.info("Navigating to order history");
         orders_button.click();
         return new OrderHistoryPage(getWebDriver());
     }

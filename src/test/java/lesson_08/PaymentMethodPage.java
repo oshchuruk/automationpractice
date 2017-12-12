@@ -19,7 +19,9 @@ public class PaymentMethodPage extends BasePage{
     WebElement cheque;
 
     void confirmOrder(){
+        LOG.info("Confirm order");
         confirm_button.click();
+        LOG.info("Checking complete order text");
         cheque.getText().contains("Your order on My Store is complete");
     }
 

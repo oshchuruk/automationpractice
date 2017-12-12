@@ -21,6 +21,7 @@ public class ItemPage extends BasePage{
     WebElement cross_button;
 
     void addItemToCart(){
+        LOG.info("Adding selected item to cart");
         submit_button.click();
         wait.until(ExpectedConditions.elementToBeClickable(cross_button));
         cross_button.click();

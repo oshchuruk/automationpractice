@@ -16,6 +16,7 @@ public class AddressPage extends BasePage{
     WebElement proceed_button;
 
     ShippingPage proceed(){
+        LOG.info("Proceed to shipping page");
         proceed_button.click();
         return new ShippingPage(getWebDriver());
     }

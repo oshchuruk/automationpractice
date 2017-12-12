@@ -4,10 +4,15 @@ import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
@@ -30,7 +35,7 @@ public class BuyTest {
 
     String email = "oshchuruk@gmail.com";
     String pass = "12345";
-    static String TARGET_ITEM = "blouse";
+    static String TARGET_ITEM = "printed summer dress";
 
     private void assertThat(ExpectedCondition<Boolean> condition) {
         (new WebDriverWait(webDriver,5)).until(condition);
@@ -70,6 +75,14 @@ public class BuyTest {
     @AfterClass
     public static void tearDown(){
         webDriver.quit();
+    }
+
+    static {
+        if(System.getProperty("report.path") == null){
+            Date dateNow = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+            System.setProperty("report.path", "./reports/IDE-test-build-" + format.format(dateNow));
+        }
     }
 
 

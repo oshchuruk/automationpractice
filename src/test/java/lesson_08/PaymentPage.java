@@ -16,6 +16,7 @@ public class PaymentPage extends BasePage{
     WebElement bankwire;
 
     PaymentMethodPage payWithBankWire(){
+        LOG.info("Selecting bankwire payment method");
         bankwire.click();
         return new PaymentMethodPage(getWebDriver());
     }

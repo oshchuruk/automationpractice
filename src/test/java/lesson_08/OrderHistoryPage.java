@@ -22,15 +22,19 @@ public class OrderHistoryPage extends BasePage{
     }
 
     void getLastOrderInfo(){
+        LOG.info("Get last order info");
         last_order_info_button.click();
     }
 
     boolean checkItemInOrder(String item_name){
+        LOG.info("Searching for "+item_name+" in order info");
         for (WebElement item : items_in_order){
             if(item.getText().toLowerCase().contains(item_name.toLowerCase())){
+                LOG.info(item_name + " is found");
                 return true;
             }
         }
+        LOG.info(item_name + " is not found");
         return false;
     }
 }

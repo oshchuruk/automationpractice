@@ -35,20 +35,25 @@ public class SearchPage extends BasePage{
     }
 
     boolean isItemFound(String item_name){
+        LOG.info("Searching for "+item_name+" in results");
         for(WebElement item : search_result){
             String temp_name = item.getText().toLowerCase();
             if (temp_name.equals(item_name.toLowerCase())){
+                LOG.info(item_name+" is found");
                 return true;
             }
         }
+        LOG.info(item_name+" is not found");
         return false;
     }
 
     ItemPage selectItem (String item_name){
+        LOG.info("Selecting "+item_name+" in results");
         for(WebElement item : search_result){
             String temp_name = item.getText().toLowerCase();
             if (temp_name.equals(item_name.toLowerCase())){
                 item.click();
+                LOG.info(item_name+" is selected");
                 break;
             }
         }

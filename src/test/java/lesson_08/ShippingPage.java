@@ -20,7 +20,9 @@ public class ShippingPage extends BasePage{
     WebElement terms_of_service;
 
     PaymentPage proceed(){
+        LOG.info("Agree with terms of service");
         terms_of_service.click();
+        LOG.info("Proceed to payment page");
         proceed_button.click();
         return new PaymentPage(getWebDriver());
     }

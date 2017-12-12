@@ -40,6 +40,7 @@ public class LoginPage extends BasePage{
     }
 
     AccountPage login(String username, String password){
+        LOG.info("Logging user "+username);
         enterUsername(username);
         enterPassword(password);
         clickSignInBtn();
