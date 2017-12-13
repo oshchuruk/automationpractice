@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class CartPage extends BasePage{
     boolean neededItemInCart(String needed_item){
         LOG.info("Searching for "+needed_item+" in cart");
         for (WebElement item : items_in_cart){
+            wait.until(ExpectedConditions.visibilityOf(item));
             if (item.getText().toLowerCase().equals(needed_item.toLowerCase())){
                 LOG.info(needed_item+" is found");
                 return true;
@@ -36,6 +38,7 @@ public class CartPage extends BasePage{
 
     AddressPage proceed(){
         LOG.info("Proceed to address page");
+        wait.until(ExpectedConditions.elementToBeClickable(proceed_button));
         proceed_button.click();
         return new AddressPage(getWebDriver());
     }

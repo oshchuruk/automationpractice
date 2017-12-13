@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class SearchPage extends BasePage{
     @FindBy(css = "div[class=\"product-container\"] a[class=\"product-name\"]")
     List<WebElement> search_result;
 
-    int count_of_results = Character.getNumericValue(heading_counter.getText().charAt(0));
+//    int count_of_results = Character.getNumericValue(heading_counter.getText().charAt(0));
 
 
     void switchToList(){
@@ -35,8 +36,10 @@ public class SearchPage extends BasePage{
     }
 
     boolean isItemFound(String item_name){
+        wait.until(CustomConditions.listLenghtToBeNotZero(By.cssSelector("div[class=\"product-container\"] a[class=\"product-name\"]")));
         LOG.info("Searching for "+item_name+" in results");
         for(WebElement item : search_result){
+            wait.until(ExpectedConditions.visibilityOf(item));
             String temp_name = item.getText().toLowerCase();
             if (temp_name.equals(item_name.toLowerCase())){
                 LOG.info(item_name+" is found");
@@ -50,6 +53,7 @@ public class SearchPage extends BasePage{
     ItemPage selectItem (String item_name){
         LOG.info("Selecting "+item_name+" in results");
         for(WebElement item : search_result){
+            wait.until(ExpectedConditions.elementToBeClickable(item));
             String temp_name = item.getText().toLowerCase();
             if (temp_name.equals(item_name.toLowerCase())){
                 item.click();

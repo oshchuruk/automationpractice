@@ -1,5 +1,6 @@
-package lesson_07;
+package lesson_08;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -54,6 +55,18 @@ public class CustomConditions {
             public Boolean apply(@Nullable WebDriver webDriver) {
                 List<WebElement> found_elements = webDriver.findElements(list_locator);
                 Boolean result = found_elements.size() == expected_size;
+                return result;
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> listLenghtToBeNotZero(By list_locator){
+        return new ExpectedCondition<Boolean>() {
+            @Nullable
+            @Override
+            public Boolean apply(@Nullable WebDriver webDriver) {
+                List<WebElement> found_elements = webDriver.findElements(list_locator);
+                Boolean result = found_elements.size() > 0;
                 return result;
             }
         };

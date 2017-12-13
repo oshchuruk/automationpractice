@@ -44,7 +44,7 @@ public class BuyTest {
     @BeforeClass
     public static void setUp(){
         webDriver = new FirefoxDriver();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.manage().window().maximize();
         webDriver.get(BASE_URL);
     }

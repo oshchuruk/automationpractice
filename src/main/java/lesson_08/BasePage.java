@@ -9,6 +9,7 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.logging.Level;
@@ -36,6 +37,7 @@ public class BasePage {
     WebElement cart;
 
     SearchPage search(String search_value){
+        wait.until(ExpectedConditions.visibilityOf(search_field));
         LOG.info("Searching for - " + search_value);
         search_field.sendKeys(search_value);
         search_field.submit();
@@ -44,20 +46,25 @@ public class BasePage {
     }
 
     CartPage navigateToCart(){
+        wait.until(ExpectedConditions.elementToBeClickable(cart));
         LOG.info("Navigating to cart");
         cart.click();
         return new CartPage(getWebDriver());
     }
 
     AccountPage navigateToAccount(){
+        By account_locator = By.className("account");
+        wait.until(ExpectedConditions.elementToBeClickable(account_locator));
         LOG.info("Navigating to my account");
-        webDriver.findElement(By.className("account")).click();
+        webDriver.findElement(account_locator).click();
         return new AccountPage(getWebDriver());
     }
 
     LoginPage navigateToLogin(){
+        By login_locator = By.cssSelector("a[class=\"login\"]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(login_locator));
         LOG.info("Navigating to login");
-        webDriver.findElement(By.cssSelector("a[class=\"login\"]")).click();
+        webDriver.findElement(login_locator).click();
         return new LoginPage(getWebDriver());
     }
 }

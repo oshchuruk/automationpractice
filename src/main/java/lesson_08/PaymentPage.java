@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class PaymentPage extends BasePage{
     WebDriver webDriver;
@@ -16,6 +17,7 @@ public class PaymentPage extends BasePage{
     WebElement bankwire;
 
     PaymentMethodPage payWithBankWire(){
+        wait.until(ExpectedConditions.elementToBeClickable(bankwire));
         LOG.info("Selecting bankwire payment method");
         bankwire.click();
         return new PaymentMethodPage(getWebDriver());

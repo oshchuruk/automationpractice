@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class OrderHistoryPage extends BasePage{
     }
 
     void getLastOrderInfo(){
+        wait.until(ExpectedConditions.elementToBeClickable(last_order_info_button));
         LOG.info("Get last order info");
         last_order_info_button.click();
     }
@@ -29,6 +31,7 @@ public class OrderHistoryPage extends BasePage{
     boolean checkItemInOrder(String item_name){
         LOG.info("Searching for "+item_name+" in order info");
         for (WebElement item : items_in_order){
+            wait.until(ExpectedConditions.visibilityOf(item));
             if(item.getText().toLowerCase().contains(item_name.toLowerCase())){
                 LOG.info(item_name + " is found");
                 return true;
