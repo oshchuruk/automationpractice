@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class SearchTest extends BaseTest{
+public class SearchTest10 extends BaseTest{
 
     @Test
     public void test01_search(){
